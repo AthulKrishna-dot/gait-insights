@@ -239,8 +239,10 @@ export function parseDailyCsv(csv: string): DailyRecord[] {
   const lines = csv.trim().split(/\r?\n/);
   if (lines.length < 2) return [];
   const header = lines[0]!.split(",").map((h) => h.trim());
-  const numeric = new Set(
-    DAILY_CSV_COLUMNS.filter((c) => c !== "patient_id" && c !== "date" && c !== "last_sample_at"),
+  const numeric = new Set<string>(
+    DAILY_CSV_COLUMNS.filter(
+      (c) => c !== "patient_id" && c !== "date" && c !== "last_sample_at",
+    ) as string[],
   );
 
   return lines.slice(1).flatMap<DailyRecord>((line) => {
@@ -249,7 +251,7 @@ export function parseDailyCsv(csv: string): DailyRecord[] {
     const row: Record<string, string | number> = {};
     header.forEach((key, i) => {
       const raw = (cells[i] ?? "").trim();
-      if (numeric.has(key as keyof DailyRecord)) {
+      if (numeric.has(key)) {
         const value = Number(raw);
         row[key] = Number.isFinite(value) ? value : 0;
       } else {
