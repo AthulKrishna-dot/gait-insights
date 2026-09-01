@@ -18,14 +18,16 @@ import { formatShortDate } from "@/utils/format";
 import type { DailyRecord } from "@/data/types";
 
 export interface SeriesConfig {
-  key: keyof DailyRecord;
+  /** Any numeric field on the plotted rows (daily record fields or derived ones). */
+  key: string;
   label: string;
   color: string;
 }
 
 interface TimeSeriesChartProps {
-  data: DailyRecord[];
+  data: (DailyRecord & Record<string, unknown>)[];
   series: SeriesConfig[];
+
   yLabel: string;
   variant?: "line" | "area" | "bar";
   height?: number;
