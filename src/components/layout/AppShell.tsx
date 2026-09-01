@@ -40,7 +40,7 @@ export function AppShell({ children }: { children: ReactNode }) {
 
             <div className="min-w-0 flex-1">
               <h1 className="truncate font-display text-base font-semibold text-foreground sm:text-lg">
-                Smart Rehabilitation Analytics
+                Self-Powered Edge-AI Rehabilitation Companion
               </h1>
               <p className="truncate text-[11px] text-muted-foreground sm:text-xs">
                 Edge-AI Rehabilitation Monitoring &amp; Gait Analytics
@@ -70,7 +70,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <main className="mx-auto w-full max-w-[1400px] space-y-5 px-4 py-5 sm:px-6 sm:py-6">{children}</main>
 
         <footer className="mx-auto w-full max-w-[1400px] px-4 pb-8 text-[11px] text-muted-foreground sm:px-6">
-          Smart Rehabilitation Analytics · Prototype v1.0 · Demo Data Mode · Local SLM Integration: Planned ·
+          Self-Powered Edge-AI Rehabilitation Companion · Prototype v1.0 · Demo Data Mode · Local SLM Integration: Planned ·
           Not a medical device and not HIPAA/GDPR certified.
         </footer>
       </div>

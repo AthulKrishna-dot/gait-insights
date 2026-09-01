@@ -13,13 +13,13 @@ import { formatLongDate, formatNumber } from "@/utils/format";
 export const Route = createFileRoute("/reports")({
   head: () => ({
     meta: [
-      { title: "Patient Reports — Smart Rehabilitation Analytics" },
+      { title: "Patient Reports — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         name: "description",
         content:
           "Self-reported pain, anxiety, mood, appetite and sleep score trends recorded alongside sensor data in the rehabilitation prototype.",
       },
-      { property: "og:title", content: "Patient Reports — Smart Rehabilitation Analytics" },
+      { property: "og:title", content: "Patient Reports — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         property: "og:description",
         content: "Self-reported wellbeing score trends for the smart rehabilitation monitoring prototype.",

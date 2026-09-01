@@ -32,13 +32,13 @@ import { formatMetric, formatNumber, formatShortDate } from "@/utils/format";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Dashboard — Smart Rehabilitation Analytics" },
+      { title: "Dashboard — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         name: "description",
         content:
           "Edge-AI rehabilitation monitoring overview: gait KPIs, energy harvesting, patient-reported scores and data quality from fictional demo data.",
       },
-      { property: "og:title", content: "Dashboard — Smart Rehabilitation Analytics" },
+      { property: "og:title", content: "Dashboard — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         property: "og:description",
         content:

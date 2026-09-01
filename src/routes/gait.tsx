@@ -19,13 +19,13 @@ import type { DailyMetricKey } from "@/data/types";
 export const Route = createFileRoute("/gait")({
   head: () => ({
     meta: [
-      { title: "Gait Analysis — Smart Rehabilitation Analytics" },
+      { title: "Gait Analysis — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         name: "description",
         content:
           "Gait speed, stride length and left/right asymmetry trends with current-versus-previous period comparison, derived from smart-insole demo data.",
       },
-      { property: "og:title", content: "Gait Analysis — Smart Rehabilitation Analytics" },
+      { property: "og:title", content: "Gait Analysis — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         property: "og:description",
         content: "Descriptive gait parameter trends and period comparison for the rehabilitation prototype.",

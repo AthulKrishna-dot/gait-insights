@@ -25,13 +25,13 @@ import { formatTimestamp } from "@/utils/format";
 export const Route = createFileRoute("/ai-summary")({
   head: () => ({
     meta: [
-      { title: "AI Clinical Summary — Smart Rehabilitation Analytics" },
+      { title: "AI Clinical Summary — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         name: "description",
         content:
           "Generate non-diagnostic, multilingual rehabilitation summaries from fused gait, activity, self-reported and energy data on the edge device.",
       },
-      { property: "og:title", content: "AI Clinical Summary — Smart Rehabilitation Analytics" },
+      { property: "og:title", content: "AI Clinical Summary — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         property: "og:description",
         content:

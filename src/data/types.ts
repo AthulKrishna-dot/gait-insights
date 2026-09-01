@@ -1,5 +1,5 @@
 /**
- * Shared domain types for the Smart Rehabilitation Analytics prototype.
+ * Shared domain types for the Self-Powered Edge-AI Rehabilitation Companion prototype.
  *
  * These types describe the contract between the data source (currently demo
  * CSV/generated data) and the UI. A future MySQL/PostgreSQL + ESP32 backend
