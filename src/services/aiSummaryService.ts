@@ -65,18 +65,44 @@ const DIRECTION_WORDS: Record<SummaryLanguage, Record<MetricTrend["direction"], 
   hi: { increased: "बढ़ा", decreased: "घटा", stable: "तुलनात्मक रूप से स्थिर रहा" },
 };
 
-const TEMPLATES: Record<
-  SummaryLanguage,
-  {
-    headline: (patient: string) => string;
-    activity: (v: Record<string, string>) => string;
-    gait: (v: Record<string, string>) => string;
-    energy: (v: Record<string, string>) => string;
-    reported: (v: Record<string, string>) => string;
-    quality: (v: Record<string, string>) => string;
-    disclaimer: string;
-  }
-> = {
+interface SummaryValues {
+  days: string;
+  steps: string;
+  distance: string;
+  minutes: string;
+  stepsTrend: string;
+  stepsChange: string;
+  speed: string;
+  speedTrend: string;
+  stride: string;
+  strideTrend: string;
+  asym: string;
+  asymTrend: string;
+  avgEnergy: string;
+  maxEnergy: string;
+  stored: string;
+  consumed: string;
+  energyStatus: string;
+  pain: string;
+  sleep: string;
+  general: string;
+  generalTrend: string;
+  completeness: string;
+  records: string;
+  communication: string;
+}
+
+interface LanguageTemplate {
+  headline: (patient: string) => string;
+  activity: (v: SummaryValues) => string;
+  gait: (v: SummaryValues) => string;
+  energy: (v: SummaryValues) => string;
+  reported: (v: SummaryValues) => string;
+  quality: (v: SummaryValues) => string;
+  disclaimer: string;
+}
+
+const TEMPLATES: Record<SummaryLanguage, LanguageTemplate> = {
   en: {
     headline: (p) => `Rehabilitation monitoring observations for ${p}`,
     activity: (v) =>
@@ -169,7 +195,7 @@ function runSummaryEngine(data: FusedPatientData, language: SummaryLanguage): Om
   const generalDirection: MetricTrend["direction"] =
     Math.abs(generalDelta) < 1.5 ? "stable" : generalDelta > 0 ? "increased" : "decreased";
 
-  const values: Record<string, string> = {
+  const values: SummaryValues = {
     days: String(gait.windowDays),
     steps: gait.totals.steps.toLocaleString("en-US"),
     distance: String(gait.totals.distance_km),
