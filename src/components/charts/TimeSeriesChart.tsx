@@ -55,25 +55,32 @@ export function TimeSeriesChart({
 
   const chartData = data.map((row) => ({ ...row, label: formatShortDate(row.date) }));
 
-  const common = (
-    <>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+  // NOTE: keep this as an array, not a fragment — Recharts does not look
+  // inside fragments when discovering axes, tooltip and legend children.
+  const common = [
+      <CartesianGrid
+        key="grid" strokeDasharray="3 3" stroke="var(--color-border)"
+        vertical={false}
+      />,
       <XAxis
+        key="x"
         dataKey="label"
         tick={AXIS_STYLE}
         tickLine={false}
         axisLine={{ stroke: "var(--color-border)" }}
         label={{ value: xLabel, position: "insideBottom", offset: -4, style: AXIS_STYLE }}
         minTickGap={16}
-      />
+      />,
       <YAxis
+        key="y"
         tick={AXIS_STYLE}
         tickLine={false}
         axisLine={false}
         width={56}
         label={{ value: yLabel, angle: -90, position: "insideLeft", style: AXIS_STYLE }}
-      />
+      />,
       <Tooltip
+        key="tooltip"
         contentStyle={{
           background: "var(--color-popover)",
           border: "1px solid var(--color-border)",
@@ -82,10 +89,9 @@ export function TimeSeriesChart({
           color: "var(--color-popover-foreground)",
         }}
         labelStyle={{ color: "var(--color-muted-foreground)", fontSize: 11 }}
-      />
-      <Legend wrapperStyle={{ fontSize: 11, paddingTop: 12 }} />
-    </>
-  );
+      />,
+      <Legend key="legend" wrapperStyle={{ fontSize: 11, paddingTop: 12 }} />,
+  ];
 
   return (
     <div style={{ width: "100%", height }}>
