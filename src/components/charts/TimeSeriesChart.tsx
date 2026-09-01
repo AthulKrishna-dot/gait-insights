@@ -55,6 +55,18 @@ export function TimeSeriesChart({
 
   const chartData = data.map((row) => ({ ...row, label: formatShortDate(row.date) }));
 
+  // Series can mix very different magnitudes (e.g. gait speed ~1 m/s next to
+  // stride length ~105 cm). When they do, small series move to a right axis so
+  // neither of them collapses into a flat line.
+  const maxOf = (key: string) =>
+    Math.max(...chartData.map((row) => Number((row as Record<string, unknown>)[key] ?? 0) || 0));
+  const maxima = series.map((s) => maxOf(s.key));
+  const largest = Math.max(...maxima, 1);
+  const rightKeys = new Set(
+    series.filter((s, index) => series.length > 1 && largest / Math.max(maxima[index] ?? 0, 0.0001) > 10).map((s) => s.key),
+  );
+  const axisIdOf = (key: string) => (rightKeys.has(key) ? "right" : "left");
+
   // NOTE: keep this as an array, not a fragment — Recharts does not look
   // inside fragments when discovering axes, tooltip and legend children.
   const common = [
@@ -73,12 +85,26 @@ export function TimeSeriesChart({
       />,
       <YAxis
         key="y"
+        yAxisId="left"
         tick={AXIS_STYLE}
         tickLine={false}
         axisLine={false}
         width={56}
         label={{ value: yLabel, angle: -90, position: "insideLeft", style: AXIS_STYLE }}
       />,
+      ...(rightKeys.size
+        ? [
+            <YAxis
+              key="y-right"
+              yAxisId="right"
+              orientation="right"
+              tick={AXIS_STYLE}
+              tickLine={false}
+              axisLine={false}
+              width={48}
+            />,
+          ]
+        : []),
       <Tooltip
         key="tooltip"
         contentStyle={{
@@ -92,6 +118,7 @@ export function TimeSeriesChart({
       />,
       <Legend key="legend" wrapperStyle={{ fontSize: 11, paddingTop: 12 }} />,
   ];
+
 
   return (
     <div style={{ width: "100%", height }}>
