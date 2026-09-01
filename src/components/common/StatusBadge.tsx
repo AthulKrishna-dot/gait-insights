@@ -24,10 +24,10 @@ export function StatusBadge({
   className,
   withDot = true,
 }: {
-  tone?: StatusTone;
+  tone?: StatusTone | undefined;
   label: string;
-  className?: string;
-  withDot?: boolean;
+  className?: string | undefined;
+  withDot?: boolean | undefined;
 }) {
   return (
     <span

@@ -7,13 +7,13 @@ import type { TrendDirection } from "@/data/types";
 interface KpiCardProps {
   label: string;
   value: string;
-  unit?: string;
-  icon?: LucideIcon;
-  hint?: string;
-  changePercent?: number;
-  direction?: TrendDirection;
-  tone?: "default" | "accent" | "success" | "warning";
-  className?: string;
+  unit?: string | undefined;
+  icon?: LucideIcon | undefined;
+  hint?: string | undefined;
+  changePercent?: number | undefined;
+  direction?: TrendDirection | undefined;
+  tone?: "default" | "accent" | "success" | "warning" | undefined;
+  className?: string | undefined;
 }
 
 const TONE_RING: Record<NonNullable<KpiCardProps["tone"]>, string> = {

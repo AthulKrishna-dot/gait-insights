@@ -22,8 +22,8 @@ export function TrendPill({
 }: {
   direction: TrendDirection;
   changePercent: number;
-  showLabel?: boolean;
-  className?: string;
+  showLabel?: boolean | undefined;
+  className?: string | undefined;
 }) {
   const Icon = direction === "increased" ? ArrowUpRight : direction === "decreased" ? ArrowDownRight : Minus;
   return (

@@ -10,12 +10,12 @@ export function SectionCard({
   className,
   bodyClassName,
 }: {
-  title?: string;
-  description?: string;
-  action?: ReactNode;
+  title?: string | undefined;
+  description?: string | undefined;
+  action?: ReactNode | undefined;
   children: ReactNode;
-  className?: string;
-  bodyClassName?: string;
+  className?: string | undefined;
+  bodyClassName?: string | undefined;
 }) {
   return (
     <section className={cn("panel", className)}>
