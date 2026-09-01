@@ -123,7 +123,7 @@ with st.sidebar:
         "Stored energy (mJ)": "energy_stored_mj",
         "Consumed energy (mJ)": "energy_consumed_mj",
         "Data completeness (%)": "data_completeness",
-一次    }
+    }
     st.multiselect("Chart metrics", list(metric_options), default=["Steps", "Gait speed (m/s)"], key="metrics")
     export = st.button("⬇️ Download filtered CSV")
 
