@@ -25,7 +25,7 @@ export interface SeriesConfig {
 }
 
 interface TimeSeriesChartProps {
-  data: (DailyRecord & Record<string, unknown>)[];
+  data: (DailyRecord & { [extra: string]: unknown })[] | DailyRecord[];
   series: SeriesConfig[];
 
   yLabel: string;
