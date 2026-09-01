@@ -15,13 +15,13 @@ import { formatNumber } from "@/utils/format";
 export const Route = createFileRoute("/energy")({
   head: () => ({
     meta: [
-      { title: "Energy Analytics — Smart Rehabilitation Analytics" },
+      { title: "Energy Analytics — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         name: "description",
         content:
           "Self-powered insole energy analytics: harvested, stored and consumed energy per day with a prototype energy-sufficiency status.",
       },
-      { property: "og:title", content: "Energy Analytics — Smart Rehabilitation Analytics" },
+      { property: "og:title", content: "Energy Analytics — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         property: "og:description",
         content: "Energy harvesting and consumption analytics for the self-powered rehabilitation insole prototype.",

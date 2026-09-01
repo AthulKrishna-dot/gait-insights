@@ -13,13 +13,13 @@ import { DATA_SOURCE_MODE, getDatasetInfo } from "@/services/dataService";
 export const Route = createFileRoute("/settings")({
   head: () => ({
     meta: [
-      { title: "Settings — Smart Rehabilitation Analytics" },
+      { title: "Settings — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         name: "description",
         content:
           "System information, data-source mode, language preference and hardware integration placeholders for the ESP32 rehabilitation prototype.",
       },
-      { property: "og:title", content: "Settings — Smart Rehabilitation Analytics" },
+      { property: "og:title", content: "Settings — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         property: "og:description",
         content: "Data source mode, language preference and planned ESP32 hardware integration details.",

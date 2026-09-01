@@ -12,13 +12,13 @@ import { getDailyData } from "@/services/dataService";
 export const Route = createFileRoute("/daily")({
   head: () => ({
     meta: [
-      { title: "Daily Analytics — Smart Rehabilitation Analytics" },
+      { title: "Daily Analytics — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         name: "description",
         content:
           "Per-day rehabilitation analytics table and six filterable charts covering steps, distance, gait speed, stride length, asymmetry and activity duration.",
       },
-      { property: "og:title", content: "Daily Analytics — Smart Rehabilitation Analytics" },
+      { property: "og:title", content: "Daily Analytics — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         property: "og:description",
         content: "Filterable daily demo records and charts for the smart-insole rehabilitation prototype.",

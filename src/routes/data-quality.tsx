@@ -15,13 +15,13 @@ import { formatLongDate, formatNumber } from "@/utils/format";
 export const Route = createFileRoute("/data-quality")({
   head: () => ({
     meta: [
-      { title: "Data Quality — Smart Rehabilitation Analytics" },
+      { title: "Data Quality — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         name: "description",
         content:
           "Sensor health, communication status, data completeness and missing-data monitoring for the ESP32-ready rehabilitation insole prototype.",
       },
-      { property: "og:title", content: "Data Quality — Smart Rehabilitation Analytics" },
+      { property: "og:title", content: "Data Quality — Self-Powered Edge-AI Rehabilitation Companion" },
       {
         property: "og:description",
         content: "Sensor status, uptime and data completeness monitoring for the rehabilitation monitoring prototype.",
