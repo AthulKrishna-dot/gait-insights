@@ -19,9 +19,9 @@ export function SidebarContent({ onNavigate, showClose }: SidebarProps) {
           </span>
           <div>
             <p className="font-display text-sm font-semibold leading-tight text-sidebar-foreground">
-              Smart Rehab
+              Self-Powered
               <br />
-              Analytics
+              Edge-AI Companion
             </p>
             <p className="mt-1 text-[11px] text-muted-foreground">Prototype v1.0 · Demo Data</p>
           </div>
