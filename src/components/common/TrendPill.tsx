@@ -21,7 +21,8 @@ export function TrendPill({
   className,
 }: {
   direction: TrendDirection;
-  changePercent: number;
+  /** Optional: omit when only the direction word should be shown. */
+  changePercent?: number | undefined;
   showLabel?: boolean | undefined;
   className?: string | undefined;
 }) {
@@ -37,8 +38,11 @@ export function TrendPill({
       )}
     >
       <Icon className="size-3" aria-hidden="true" />
-      {formatPercentChange(changePercent)}
-      {showLabel ? <span className="hidden sm:inline">· {LABELS[direction]}</span> : null}
+      {changePercent === undefined ? LABELS[direction] : formatPercentChange(changePercent)}
+      {showLabel && changePercent !== undefined ? (
+        <span className="hidden sm:inline">· {LABELS[direction]}</span>
+      ) : null}
+
     </span>
   );
 }

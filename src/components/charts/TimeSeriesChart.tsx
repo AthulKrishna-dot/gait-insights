@@ -55,25 +55,58 @@ export function TimeSeriesChart({
 
   const chartData = data.map((row) => ({ ...row, label: formatShortDate(row.date) }));
 
-  const common = (
-    <>
-      <CartesianGrid strokeDasharray="3 3" stroke="var(--color-border)" vertical={false} />
+  // Series can mix very different magnitudes (e.g. gait speed ~1 m/s next to
+  // stride length ~105 cm). When they do, small series move to a right axis so
+  // neither of them collapses into a flat line.
+  const maxOf = (key: string) =>
+    Math.max(...chartData.map((row) => Number((row as Record<string, unknown>)[key] ?? 0) || 0));
+  const maxima = series.map((s) => maxOf(s.key));
+  const largest = Math.max(...maxima, 1);
+  const rightKeys = new Set(
+    series.filter((s, index) => series.length > 1 && largest / Math.max(maxima[index] ?? 0, 0.0001) > 10).map((s) => s.key),
+  );
+  const axisIdOf = (key: string) => (rightKeys.has(key) ? "right" : "left");
+
+  // NOTE: keep this as an array, not a fragment — Recharts does not look
+  // inside fragments when discovering axes, tooltip and legend children.
+  const common = [
+      <CartesianGrid
+        key="grid" strokeDasharray="3 3" stroke="var(--color-border)"
+        vertical={false}
+      />,
       <XAxis
+        key="x"
         dataKey="label"
         tick={AXIS_STYLE}
         tickLine={false}
         axisLine={{ stroke: "var(--color-border)" }}
         label={{ value: xLabel, position: "insideBottom", offset: -4, style: AXIS_STYLE }}
         minTickGap={16}
-      />
+      />,
       <YAxis
+        key="y"
+        yAxisId="left"
         tick={AXIS_STYLE}
         tickLine={false}
         axisLine={false}
         width={56}
         label={{ value: yLabel, angle: -90, position: "insideLeft", style: AXIS_STYLE }}
-      />
+      />,
+      ...(rightKeys.size
+        ? [
+            <YAxis
+              key="y-right"
+              yAxisId="right"
+              orientation="right"
+              tick={AXIS_STYLE}
+              tickLine={false}
+              axisLine={false}
+              width={48}
+            />,
+          ]
+        : []),
       <Tooltip
+        key="tooltip"
         contentStyle={{
           background: "var(--color-popover)",
           border: "1px solid var(--color-border)",
@@ -82,10 +115,10 @@ export function TimeSeriesChart({
           color: "var(--color-popover-foreground)",
         }}
         labelStyle={{ color: "var(--color-muted-foreground)", fontSize: 11 }}
-      />
-      <Legend wrapperStyle={{ fontSize: 11, paddingTop: 12 }} />
-    </>
-  );
+      />,
+      <Legend key="legend" wrapperStyle={{ fontSize: 11, paddingTop: 12 }} />,
+  ];
+
 
   return (
     <div style={{ width: "100%", height }}>
@@ -94,7 +127,7 @@ export function TimeSeriesChart({
           <BarChart data={chartData} margin={{ top: 8, right: 12, bottom: 24, left: 4 }}>
             {common}
             {series.map((s) => (
-              <Bar key={String(s.key)} dataKey={String(s.key)} name={s.label} fill={s.color} radius={[4, 4, 0, 0]} />
+              <Bar key={String(s.key)} yAxisId={axisIdOf(s.key)} dataKey={String(s.key)} name={s.label} fill={s.color} radius={[4, 4, 0, 0]} />
             ))}
           </BarChart>
         ) : variant === "area" ? (
@@ -111,9 +144,11 @@ export function TimeSeriesChart({
             {series.map((s) => (
               <Area
                 key={String(s.key)}
+                yAxisId={axisIdOf(s.key)}
                 type="monotone"
                 dataKey={String(s.key)}
                 name={s.label}
+
                 stroke={s.color}
                 strokeWidth={2}
                 fill={`url(#grad-${String(s.key)})`}
@@ -126,9 +161,11 @@ export function TimeSeriesChart({
             {series.map((s) => (
               <Line
                 key={String(s.key)}
+                yAxisId={axisIdOf(s.key)}
                 type="monotone"
                 dataKey={String(s.key)}
                 name={s.label}
+
                 stroke={s.color}
                 strokeWidth={2}
                 dot={false}
