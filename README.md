@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+# Self-Powered Edge-AI Rehabilitation Companion
 
 This project was built with [Lovable](https://lovable.dev).
 
