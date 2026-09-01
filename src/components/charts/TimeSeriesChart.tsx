@@ -127,7 +127,7 @@ export function TimeSeriesChart({
           <BarChart data={chartData} margin={{ top: 8, right: 12, bottom: 24, left: 4 }}>
             {common}
             {series.map((s) => (
-              <Bar key={String(s.key)} dataKey={String(s.key)} name={s.label} fill={s.color} radius={[4, 4, 0, 0]} />
+              <Bar key={String(s.key)} yAxisId={axisIdOf(s.key)} dataKey={String(s.key)} name={s.label} fill={s.color} radius={[4, 4, 0, 0]} />
             ))}
           </BarChart>
         ) : variant === "area" ? (
