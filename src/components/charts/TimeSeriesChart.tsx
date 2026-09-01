@@ -161,9 +161,11 @@ export function TimeSeriesChart({
             {series.map((s) => (
               <Line
                 key={String(s.key)}
+                yAxisId={axisIdOf(s.key)}
                 type="monotone"
                 dataKey={String(s.key)}
                 name={s.label}
+
                 stroke={s.color}
                 strokeWidth={2}
                 dot={false}
